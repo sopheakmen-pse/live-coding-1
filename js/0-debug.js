@@ -9,3 +9,5 @@ function showData() {
   console.log(age);
   console.log(country);
 }
+
+showData();

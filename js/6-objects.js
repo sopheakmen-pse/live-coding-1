@@ -13,7 +13,19 @@ const student1 = {
   class: "WMAD",
 };
 
-const student2 = {};
+const student2 = {
+  fullname: "Sopheak Lim",
+  gender: "male",
+  age: 28,
+  class: "WMAD",
+};
+
+const student3 = {
+  fullname: "Sreyphea Phon",
+  gender: "female",
+  age: 17,
+  class: "WMAD",
+};
 
 // Example 2: Access object property value , fullname, class
 

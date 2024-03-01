@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+.container {
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.container nav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+}
