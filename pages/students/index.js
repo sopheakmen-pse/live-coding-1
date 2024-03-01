@@ -5,6 +5,8 @@ const skills = [
   { value: "SALE", text: "Sale" },
   { value: "FILM", text: "Film" },
 ];
+// console.log(skills[2].value + " - " + skills[0].text);
+
 let students = [
   { fullName: "John Smith", age: 20, class: "WMAD", gender: "male" },
   { fullName: "Emily Johnson", age: 22, class: "HR", gender: "female" },
@@ -45,11 +47,24 @@ for (let i = 0; i < genders.length; i++) {
 genderSelect.addEventListener("change", filterGender);
 
 function filterGender(event) {
-  console.log(event.target.value);
-  console.log(genderSelect.value);
+  let filterStudents = [];
   for (let i = 0; i < students.length; i++) {
-    if (students[i].gender === genderSelect.value.toLowerCase()) {
-      console.log(students[i]);
+    if (students[i].gender.toUpperCase() === genderSelect.value.toUpperCase()) {
+      filterStudents.push(students[i]);
     }
   }
+
+  const studentList = document.getElementById("student-list");
+  var contentHTML = "";
+  for (let i = 0; i < filterStudents.length; i++) {
+    contentHTML += `
+      <div class="student-card">
+        ${filterStudents[i].fullName}
+      </div>
+    `;
+  }
+  studentList.innerHTML = `
+    <div>Number of ${genderSelect.value}: ${filterStudents.length}</div>
+    ${contentHTML}
+  `;
 }

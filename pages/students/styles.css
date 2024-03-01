@@ -33,3 +33,9 @@ section {
   display: flex;
   flex-direction: column;
 }
+
+.student-card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 5px;
+}
