@@ -1,6 +1,6 @@
-const genders = ["Select Gender", "Male", "Female", "unavailable"];
+const genders = ["Select Option", "Male", "Female", "unavailable"];
 const skills = [
-  { value: "NA", text: "Select Class" },
+  { value: "", text: "Select Option" },
   { value: "WMAD", text: "Web And Mobile Development" },
   { value: "HR", text: "Human Resource" },
   { value: "SALE", text: "Sale" },
@@ -44,11 +44,17 @@ const genderSelect = document.getElementById("gender");
 const classSelect = document.getElementById("class");
 
 for (let i = 0; i < genders.length; i++) {
-  genderSelect.innerHTML += `<option value="${genders[i]}">${genders[i]}</option>`;
+  if (i === 0)
+    genderSelect.innerHTML += `<option value="${genders[i]}" disabled selected>${genders[i]}</option>`;
+  else
+    genderSelect.innerHTML += `<option value="${genders[i]}">${genders[i]}</option>`;
 }
 
 for (let i = 0; i < skills.length; i++) {
-  classSelect.innerHTML += `<option value="${skills[i].value}">${skills[i].text}</option>`;
+  if (i === 0)
+    classSelect.innerHTML += `<option value="${skills[i].value}" disabled selected>${skills[i].text}</option>`;
+  else
+    classSelect.innerHTML += `<option value="${skills[i].value}">${skills[i].text}</option>`;
 }
 
 genderSelect.addEventListener("change", handleFilterStudents);
@@ -60,55 +66,57 @@ function handleFilterStudents(event) {
   displayStudentList(result2);
 }
 
-function filterWithGender(filterStudents) {
+function filterWithGender(data) {
   let results = [];
-  const isUserSelected = genderSelect.value !== genders[0];
-  if (isUserSelected) {
-    for (let i = 0; i < filterStudents.length; i++) {
-      const studentGender = students[i].gender.toUpperCase();
+  const hasFilter = genderSelect.value !== genders[0];
+  if (hasFilter) {
+    for (let i = 0; i < data.length; i++) {
+      const studentGender = data[i].gender.toUpperCase();
       const selectedGender = genderSelect.value.toUpperCase();
       if (studentGender === selectedGender) {
-        results.push(students[i]);
+        results.push(data[i]);
       }
     }
   } else {
-    return filterStudents;
+    return data;
   }
   return results;
 }
 
-function filterWithClass(filterStudents) {
+function filterWithClass(data) {
   let results = [];
-  const isUserSelected = classSelect.value !== skills[0].value;
-  if (isUserSelected) {
-    for (let i = 0; i < filterStudents.length; i++) {
-      const studentClass = students[i].class.toUpperCase();
+  const hasFilter = classSelect.value !== skills[0].value;
+  if (hasFilter) {
+    for (let i = 0; i < data.length; i++) {
+      const studentClass = data[i].class.toUpperCase();
       const selectedClass = classSelect.value.toUpperCase();
       if (studentClass === selectedClass) {
-        results.push(students[i]);
+        results.push(data[i]);
       }
     }
   } else {
-    return filterStudents;
+    return data;
   }
   return results;
 }
 
-function displayStudentList(students) {
+function displayStudentList(data) {
   const studentList = document.getElementById("student-list");
   let contentHTML = "";
-  for (let i = 0; i < students.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     contentHTML += `
       <div class="student-card">
-        <div>${students[i].fullName}</div>
-        <div>${students[i].age}</div>
-        <div>${students[i].gender}</div>
-        <div>${students[i].class}</div>
+        <div>${data[i].fullName}</div>
+        <div>${data[i].age}</div>
+        <div>${data[i].gender}</div>
+        <div>${data[i].class}</div>
       </div>
     `;
   }
   studentList.innerHTML = `
-    <div style="margin-bottom: 16px;">Number of ${classSelect.value}: ${filterStudents.length}</div>
+    <div style="margin-bottom: 16px;">Filter by ${classSelect.value ?? ""} ${
+    genderSelect.value ?? ""
+  }: ${data.length}</div>
     <div style="margin-bottom: 16px;">Total: ${students.length}</div>
     ${contentHTML}
   `;
