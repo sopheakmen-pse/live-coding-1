@@ -19,7 +19,6 @@ let name = "Sopheak Lim";
 // console.log("Monika" !== "Thavann");
 // console.log(!"Yes" === "Yes");
 // console.log("Apple" === "Alppe");
-
 // Logical operators &&, ||, !
 // console.log(!!1 === !1);
 // console.log(20 <= 2);
